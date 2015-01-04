@@ -14,6 +14,10 @@
 	<spring:message code="label.actions" />
 </a><br/>
 
+<a href="<c:url value="/registration" />">
+	<spring:message code="label.registry" />
+</a><br/>
+
 <c:if test="${not empty param.error}">
 	<font color="red"> <spring:message code="label.loginerror" />
 	: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message} </font>

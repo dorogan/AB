@@ -34,11 +34,8 @@ public class ActionController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addAction(@ModelAttribute("action") Action action,
-			BindingResult result) {
-
+	public String addAction(@ModelAttribute("action") Action action, BindingResult result) {
 		actionService.addAction(action);
-
 		return "redirect:/index";
 	}
 
