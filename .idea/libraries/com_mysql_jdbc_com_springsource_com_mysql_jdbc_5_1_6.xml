@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="com.mysql.jdbc:com.springsource.com.mysql.jdbc:5.1.6" type="repository">
+    <properties maven-id="com.mysql.jdbc:com.springsource.com.mysql.jdbc:5.1.6" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/com.springsource.com.mysql.jdbc-5.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/com.springsource.javax.transaction-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/com.springsource.javax.xml.stream-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/com.springsource.org.apache.commons.logging-1.1.1.jar!/" />
+      <root url="jar://C:/Program Files (x86)/MySQL/MySQL Connector J/mysql-connector-java-5.1.34-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
