@@ -7,6 +7,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8">
   <title><spring:message code="label.title" /></title>
+  <c:url value="/resources/css/style.css" var="cssURL" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${cssURL}" />
 </head>
 <body>
 

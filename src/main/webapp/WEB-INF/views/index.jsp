@@ -6,6 +6,8 @@
 <html>
 <head>
   <title></title>
+  <c:url value="/resources/css/style.css" var="cssURL" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${cssURL}" />
 </head>
 <body>
 

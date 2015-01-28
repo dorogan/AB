@@ -7,38 +7,43 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 	<title><spring:message code="label.title" /></title>
+	<c:url value="/resources/css/login.css" var="cssURL" />
+	<link rel="stylesheet" type="text/css" media="screen" href="${cssURL}" />
 </head>
 <body>
-
-<a href="<c:url value="/index" />">
-	<spring:message code="label.actions" />
-</a><br/>
-
-<a href="<c:url value="/registration" />">
-	<spring:message code="label.registry" />
-</a><br/>
 
 <c:if test="${not empty param.error}">
 	<font color="red"> <spring:message code="label.loginerror" />
 	: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message} </font>
 </c:if>
-<form method="POST" action="<c:url value="/j_spring_security_check" />">
+<form class="form-container" method="POST" action="<c:url value="/j_spring_security_check" />">
+	<h4 align="center" class="form-title">
+		<spring:message code="label.authorityplease" />
+	</h4>
 <table>
 	<tr>
 		<td align="right"><spring:message code="label.login" /></td>
-		<td><input type="text" name="j_username" /></td>
+		<td><input class="form-field" type="text" name="j_username" /></td>
 	</tr>
 	<tr>
 		<td align="right"><spring:message code="label.password" /></td>
-		<td><input type="password" name="j_password" /></td>
+		<td><input class="form-field" type="password" name="j_password" /></td>
 	</tr>
 	<tr>
-		<td align="right"><spring:message code="label.remember" /></td>
-		<td><input type="checkbox" name="_spring_security_remember_me" /></td>
+		<td align="right">
+			<spring:message code="label.remember" />
+			<input type="checkbox" name="_spring_security_remember_me" /></td>
+		<td colspan="2" align="right">
+			<input class="submit-button"type="submit" value="Login" />
+			<input class="submit-button" type="reset" value="Reset" />
+		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="right"><input type="submit" value="Login" />
-		<input type="reset" value="Reset" /></td>
+		<td colspan="2" align="right">
+			<a href="<c:url value="/registration" />">
+				<spring:message code="label.registry" />
+			</a><br/>
+		</td>
 	</tr>
 </table>
 </form>
