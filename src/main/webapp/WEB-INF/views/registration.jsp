@@ -22,11 +22,15 @@
   <table>
     <tr>
       <td align="right"><spring:message code="label.name" /></td>
-      <td><input type="text" name="name" /></td>
+      <td><input type="text" name="login" /></td>
+    </tr>
+    <tr>
+      <td align="right"><spring:message code="label.name" /></td>
+      <td><input type="text" name="firstname" /></td>
     </tr>
     <tr>
       <td align="right"><spring:message code="label.secondname" /></td>
-      <td><input type="text" name="secondname" /></td>
+      <td><input type="text" name="lastname" /></td>
     </tr>
     <tr>
       <td align="right"><spring:message code="label.login" /></td>

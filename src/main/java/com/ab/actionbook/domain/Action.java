@@ -8,30 +8,30 @@ import javax.persistence.Id;
 import java.sql.Date;
 
 @Entity
-@Table(name = "ACTIONS")
+@Table(name = "actions")
 public class Action {
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue
 	private Integer id;
 
-	@Column(name = "NAME")
+	@Column(name = "name")
 	private String name;
 
-	@Column(name = "DESCRIPTION")
+	@Column(name = "description")
 	private String description;
 
-	@Column(name = "DATE")
+	@Column(name = "date")
 	private String date = "zxczx";
 
-	@Column(name = "STATUS")
+	@Column(name = "status")
 	private int status;
 
-	@Column(name = "UID")
+	@Column(name = "uid")
 	private int uid;
 
-	@Column(name = "PERMISSION")
+	@Column(name = "permission")
 	private int permission;
 
 	public Integer getId() {

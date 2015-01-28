@@ -3,7 +3,7 @@ package com.ab.actionbook.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -11,20 +11,20 @@ public class User {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "login")
+    private String login;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "firstname")
+    private String firstname;
 
-    @Column(name = "secondname")
-    private String secondname;
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "BIRTHDAY")
-    private String birthday = "date";
+    @Column(name = "password")
+    private String password;
 
     public Integer getId() {
         return id;
@@ -34,28 +34,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getSecondname() {
-        return secondname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSecondname(String secondname) {
-        this.secondname = secondname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -66,11 +66,11 @@ public class User {
         this.email = email;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getPassword() {
+        return password;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

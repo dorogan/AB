@@ -45,7 +45,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" />
+          <unit-entry name="hibernate.cfg.xml" value="35cc35fe-5a29-4455-949e-a004497f48ea" />
           <unit-entry name="sessionFactory" value="dataSource" />
         </datasource-map>
         <naming-strategy-map />
@@ -53,9 +53,7 @@
       </configuration>
     </facet>
     <facet type="AspectJ" name="AspectJ">
-      <configuration>
-        <option name="overrideAspectPath" value="true" />
-      </configuration>
+      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
@@ -68,19 +66,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-core:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-web:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test-mvc:1.0.0.M2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:3.2.0.RELEASE" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.8.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.56" level="application_server_libraries" />
     <orderEntry type="library" name="com.mysql.jdbc:com.springsource.com.mysql.jdbc:5.1.6" level="project" />
     <orderEntry type="library" name="Spring Security-3.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:3.0.5.RELEASE" level="project" />

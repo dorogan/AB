@@ -19,7 +19,7 @@ public class ActionController {
 	@Autowired
 	private ActionService actionService;
 
-	@RequestMapping("/index")
+	@RequestMapping("/action")
 	public String listActions(Map<String, Object> map) {
 
 		map.put("action", new Action());
@@ -27,7 +27,7 @@ public class ActionController {
 
 		return "action";
 	}
-	
+
 	@RequestMapping("/")
 	public String home() {
 		return "redirect:/index";
