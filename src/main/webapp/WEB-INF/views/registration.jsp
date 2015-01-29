@@ -7,44 +7,52 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8">
   <title><spring:message code="label.title" /></title>
-  <c:url value="/resources/css/style.css" var="cssURL" />
+  <c:url value="/resources/css/registry.css" var="cssURL" />
   <link rel="stylesheet" type="text/css" media="screen" href="${cssURL}" />
 </head>
 <body>
-
-<a href="<c:url value="/index" />">
-  <spring:message code="label.actions" />
-</a><br/>
 
 <c:if test="${not empty param.error}">
   <font color="red"> <spring:message code="label.loginerror" />
     : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message} </font>
 </c:if>
-<form method="POST" action="/registration/add">
+<form class="form-container" method="POST" action="/registration/add">
+  <h4 align="center" class="form-title">
+    <spring:message code="label.enterregistry" />
+  </h4>
   <table>
     <tr>
-      <td align="right"><spring:message code="label.name" /></td>
-      <td><input type="text" name="login" /></td>
+      <td align="right"><spring:message code="label.login" /></td>
+      <td><input class="form-field" type="text" name="login" /></td>
     </tr>
     <tr>
       <td align="right"><spring:message code="label.name" /></td>
-      <td><input type="text" name="firstname" /></td>
+      <td><input class="form-field" type="text" name="firstname" /></td>
     </tr>
     <tr>
       <td align="right"><spring:message code="label.secondname" /></td>
-      <td><input type="text" name="lastname" /></td>
+      <td><input class="form-field" type="text" name="lastname" /></td>
     </tr>
     <tr>
       <td align="right"><spring:message code="label.login" /></td>
-      <td><input type="text" name="email" /></td>
+      <td><input class="form-field" type="text" name="email" /></td>
     </tr>
     <tr>
       <td align="right"><spring:message code="label.password" /></td>
-      <td><input type="text" name="password" /></td>
+      <td><input class="form-field" type="password" name="password" /></td>
     </tr>
     <tr>
-      <td colspan="2" align="right"><input type="submit" value="Registration" />
-        <input type="reset" value="Reset" /></td>
+      <td class="submit-container" colspan="2" align="right">
+        <input class="submit-button" type="submit" value="Registration" />
+        <input class="submit-button" type="reset" value="Reset" />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="right">
+        <a href="<c:url value="/login.jsp" />">
+          <spring:message code="label.loginpage" />
+        </a><br/>
+      </td>
     </tr>
   </table>
 </form>
