@@ -10,19 +10,25 @@
   <link rel="stylesheet" type="text/css" media="screen" href="${cssURL}" />
 </head>
 <body>
-
-<a href="<c:url value="/index" />">
-  <h2><spring:message code="label.title" /></h2>
-</a><br/>
-
-<a href="<c:url value="/action" />">
-  <spring:message code="label.addaction" />
-</a>
-
-<a href="<c:url value="/logout" />">
-  <spring:message code="label.logout" />
-</a>
-
+<div class="left-bar">
+  <ul>
+    <li>
+      <a href="<c:url value="/index" />">
+        <h1><spring:message code="main.title" /></h1>
+      </a>
+    </li>
+    <li>
+      <a href="<c:url value="/action" />">
+        <img src="/resources/images/add.png" alt="<spring:message code="label.addaction" />"/>
+      </a>
+    </li>
+  </ul>
+  <div class="exit">
+    <a href="<c:url value="/logout" />">
+      <img src="/resources/images/logout.png" alt="<spring:message code="label.addaction" />"/>
+    </a>
+  </div>
+</div>
 <h3><spring:message code="label.actions" /></h3>
 <c:if test="${!empty actionList}">
   <table class="data">
