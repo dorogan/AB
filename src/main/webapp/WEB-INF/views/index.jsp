@@ -14,12 +14,17 @@
   <ul>
     <li>
       <a href="<c:url value="/index" />">
-        <h1><spring:message code="main.title" /></h1>
+        <img src="/resources/images/ab.png" />
       </a>
     </li>
     <li>
       <a href="<c:url value="/action" />">
         <img src="/resources/images/add.png" alt="<spring:message code="label.addaction" />"/>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <img src="/resources/images/actions.png" />
       </a>
     </li>
   </ul>
