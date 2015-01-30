@@ -6,6 +6,14 @@
 <html>
 <head>
   <title></title>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+  <!-- x-editable (bootstrap version) -->
+  <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+  <script src="/resources/bootstrap-editable/js/main.js"></script>
   <c:url value="/resources/css/style.css" var="cssURL" />
   <link rel="stylesheet" type="text/css" media="screen" href="${cssURL}" />
 </head>
@@ -37,17 +45,10 @@
 <h3><spring:message code="label.actions" /></h3>
 <c:if test="${!empty actionList}">
   <table class="data">
-    <tr>
-      <td><spring:message code="label.actionname" /></td>
-      <td><spring:message code="label.actiondescription" /></td>
-      <td><spring:message code="label.actionpermission" /></td>
-    </tr>
     <c:forEach items="${actionList}" var="action">
       <tr>
-        <td>${action.name}</td>
-        <td>${action.description}</td>
-        <td>${action.permission}</td>
-        <td><a href="delete/${action.id}"><spring:message code="label.delete" /></a></td>
+        <td><h4 class="username" data-type="text" data-placement="right" data-title="Enter username">${action.name}</h4></td>
+        <td><a  href="delete/${action.id}"><img src="/resources/images/del.png"></a></td>
       </tr>
     </c:forEach>
   </table>
