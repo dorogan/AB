@@ -22,23 +22,23 @@
   <ul>
     <li>
       <a href="<c:url value="/index" />">
-        <img src="/resources/images/ab.png" />
+        <img src="<c:url value="/resources/images/ab.png"/>" />
       </a>
     </li>
     <li>
       <a href="<c:url value="/action" />">
-        <img src="/resources/images/add.png" alt="<spring:message code="label.addaction" />"/>
+        <img src="<c:url value="/resources/images/add.png"/>" alt="<spring:message code="label.addaction" />"/>
       </a>
     </li>
     <li>
       <a href="#">
-        <img src="/resources/images/actions.png" />
+        <img src="<c:url value="/resources/images/actions.png"/>" />
       </a>
     </li>
   </ul>
   <div class="exit">
     <a href="<c:url value="/logout" />">
-      <img src="/resources/images/logout.png" alt="<spring:message code="label.addaction" />"/>
+      <img src="<c:url value="/resources/images/logout.png"/> " alt="<spring:message code="label.addaction" />"/>
     </a>
   </div>
 </div>
@@ -48,7 +48,7 @@
     <c:forEach items="${actionList}" var="action">
       <tr>
         <td><h4 class="username" data-type="text" data-placement="right" data-title="Enter username">${action.name}</h4></td>
-        <td><a  href="delete/${action.id}"><img src="/resources/images/del.png"></a></td>
+        <td><a  href="delete/${action.id}"><img src="<c:url value="/resources/images/del.png"/>"></a></td>
       </tr>
     </c:forEach>
   </table>
