@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@SecondaryTable(name = "users_relations", pkJoinColumns = @PrimaryKeyJoinColumn(name = "uid"))
+
 public class User {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue
     private Integer id;
 
@@ -25,6 +26,22 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "fid", table = "users_relations")
+    private Integer fid;
+
+    @Column(name = "relation", table = "users_relations")
+    private Integer relation;
+
+    public User(String login, String firstname, String lastname, String email, String password) {
+        this.login = login;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(){}
 
     public Integer getId() {
         return id;
@@ -72,5 +89,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getFid() {
+        return fid;
+    }
+
+    public void setFid(Integer fid) {
+        this.fid = fid;
+    }
+
+    public Integer getRelation() {
+        return relation;
+    }
+
+    public void setRelation(Integer relation) {
+        this.relation = relation;
     }
 }

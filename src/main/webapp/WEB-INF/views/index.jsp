@@ -35,6 +35,12 @@
         <img src="<c:url value="/resources/images/actions.png"/>" />
       </a>
     </li>
+    <li>
+      <a href="/peoples">
+        <spring:message code="msg.peoples" />
+      </a>
+    </li>
+
   </ul>
   <div class="exit">
     <a href="<c:url value="/logout" />">
