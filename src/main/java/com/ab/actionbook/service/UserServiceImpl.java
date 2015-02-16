@@ -33,8 +33,36 @@ public class UserServiceImpl implements UserService{
 
     }
 
+    @Override
+    public List<User> getAllFriends() {
+        return userDAO.getAllFriends();
+    }
+
+    @Override
+    public int getCountOfPropositionToFriends() {
+        return 0;
+    }
+
     @Transactional
     public void addToFriend(Integer id){
         userDAO.addToFriend(id);
+    }
+
+    @Transactional
+    @Override
+    public List<User> getAllPropositions() {
+        return userDAO.getAllPropositions();
+    }
+
+    @Transactional
+    @Override
+    public void confirmPropose(Integer id) {
+        userDAO.confirmPropose(id);
+    }
+
+    @Transactional
+    @Override
+    public void turnDownPropose(Integer id) {
+        userDAO.turnDownPropose(id);
     }
 }

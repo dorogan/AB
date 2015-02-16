@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -38,11 +39,17 @@ public class UserDAOImpl implements UserDAO{
     @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
         return sessionFactory.getCurrentSession().createQuery("from User").list();
+    }
 
+    @SuppressWarnings("unchecked")
+    public List<User> getAllFriends() {
+        User user = getCurrentUser();
+        int uid = user.getId();
+        return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
 
     @Override
-    public void addToFriend(Integer id) {
+    public User getCurrentUser() {
         String username;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
@@ -51,12 +58,58 @@ public class UserDAOImpl implements UserDAO{
             username = principal.toString();
         }
         User user = getUserByLogin(username);
+        return user;
+    }
+
+    @Override
+    public int getCountOfPropositionToFriends() {
+        return getAllPropositions().size();
+    }
+
+    @Override
+    public void addToFriend(Integer id) {
+        User user = getCurrentUser();
         int uid = user.getId();
 
         sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO users_relations (uid, fid, relation) VALUES (" +
                 id +", " + uid + ", -1)").executeUpdate();
         sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO users_relations (uid, fid, relation) VALUES (" +
                 uid +", " + id + ", 2)").executeUpdate();
+    }
+
+    @Override
+    public List<User> getAllPropositions() {
+        User user = getCurrentUser();
+        int uid = user.getId();
+        List<Integer> userIdProp= sessionFactory.getCurrentSession().createSQLQuery("SELECT fid FROM users_relations WHERE " +
+                "uid=" + uid + " AND relation=-1").list();
+        List<User> uProp = new ArrayList<User>();
+        for (int i = 0; i < userIdProp.size(); i++) {
+            int id = userIdProp.get(i);
+            List<User> usr = sessionFactory.getCurrentSession().createQuery("from User where id=" + id).list();
+            uProp.add(i, usr.get(0));
+        }
+        return uProp;
+    }
+
+    @Override
+    public void confirmPropose(Integer id) {
+        User user = getCurrentUser();
+        int uid = user.getId();
+
+        sessionFactory.getCurrentSession().createSQLQuery("UPDATE `users_relations` SET `relation`=1 WHERE uid="+uid+
+                " AND fid=" + id).executeUpdate();
+        sessionFactory.getCurrentSession().createSQLQuery("UPDATE `users_relations` SET `relation`=1 WHERE uid="+id+
+                " AND uid=" + id).executeUpdate();
+    }
+
+    @Override
+    public void turnDownPropose(Integer id) {
+        User user = getCurrentUser();
+        int uid = user.getId();
+
+        sessionFactory.getCurrentSession().createSQLQuery("UPDATE `users_relations` SET `relation`=0 WHERE uid="+uid+
+                " AND fid=" + id).executeUpdate();
     }
 
     /*@SuppressWarnings("deprecation")

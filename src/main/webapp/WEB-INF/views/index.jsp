@@ -40,6 +40,11 @@
         <spring:message code="msg.peoples" />
       </a>
     </li>
+    <li>
+      <a href="/friends">
+        <spring:message code="msg.friends" />
+      </a>
+    </li>
 
   </ul>
   <div class="exit">

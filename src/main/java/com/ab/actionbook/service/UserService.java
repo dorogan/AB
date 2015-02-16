@@ -13,6 +13,16 @@ public interface UserService {
 
     public List<User> getAllUsers();
 
+    public List<User> getAllFriends();
+
+    public int getCountOfPropositionToFriends();
+
     public void addToFriend(Integer id);
+
+    public List<User> getAllPropositions();
+
+    public void confirmPropose(Integer id);
+
+    public void turnDownPropose(Integer id);
 
 }
