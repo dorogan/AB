@@ -65,4 +65,10 @@ public class UserServiceImpl implements UserService{
     public void turnDownPropose(Integer id) {
         userDAO.turnDownPropose(id);
     }
+
+    @Transactional
+    @Override
+    public User getCurrentUser() {
+        return userDAO.getCurrentUser();
+    }
 }

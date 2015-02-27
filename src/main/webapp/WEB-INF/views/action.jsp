@@ -21,6 +21,8 @@
 	<spring:message code="label.logout" />
 </a>
 
+<h3>ID - ${userID}</h3>
+
 <form:form method="post" action="add" commandName="action">
 
 	<table>

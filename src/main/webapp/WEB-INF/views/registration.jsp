@@ -34,7 +34,7 @@
       <td><input class="form-field" type="text" name="lastname" /></td>
     </tr>
     <tr>
-      <td align="right"><spring:message code="label.login" /></td>
+      <td align="right"><spring:message code="label.mail" /></td>
       <td><input class="form-field" type="text" name="email" /></td>
     </tr>
     <tr>

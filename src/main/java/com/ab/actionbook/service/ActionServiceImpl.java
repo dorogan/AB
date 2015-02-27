@@ -15,13 +15,13 @@ public class ActionServiceImpl implements ActionService {
     private ActionDAO actionDAO;
  
     @Transactional
-    public void addAction(Action action) {
-        actionDAO.addAction(action);
+    public void addAction(Action action, Integer uid) {
+        actionDAO.addAction(action, uid);
     }
  
     @Transactional
-    public List<Action> listAction() {
-        return actionDAO.listAction();
+    public List<Action> listAction(Integer uid) {
+        return actionDAO.listAction(uid);
     }
  
     @Transactional

@@ -25,9 +25,11 @@ public class UserDAOImpl implements UserDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
-
     public void addUser(User user) {
         sessionFactory.getCurrentSession().save(user);
+        sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO " +
+                "user_authorization (userrole_id, user_id, role)" +
+                "VALUES (" + 1 +", " + user.getId() + ", 'ROLE_USER')").executeUpdate();
     }
 
     @SuppressWarnings("unchecked")
@@ -110,6 +112,11 @@ public class UserDAOImpl implements UserDAO{
 
         sessionFactory.getCurrentSession().createSQLQuery("UPDATE `users_relations` SET `relation`=0 WHERE uid="+uid+
                 " AND fid=" + id).executeUpdate();
+    }
+
+    @Override
+    public void setUserInformation() {
+
     }
 
     /*@SuppressWarnings("deprecation")

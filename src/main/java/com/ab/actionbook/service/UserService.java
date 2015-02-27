@@ -25,4 +25,6 @@ public interface UserService {
 
     public void turnDownPropose(Integer id);
 
+    public User getCurrentUser();
+
 }
