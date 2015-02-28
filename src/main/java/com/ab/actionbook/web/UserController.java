@@ -26,4 +26,9 @@ public class UserController {
         return "redirect:/index";
     }
 
+    @RequestMapping("/user")
+    public String userPage(){
+        return "user";
+    }
+
 }

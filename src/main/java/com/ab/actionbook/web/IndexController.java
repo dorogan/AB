@@ -26,6 +26,8 @@ public class IndexController {
         map.put("action", new Action());
         map.put("actionList", actionService.listAction(userService.getCurrentUser().getId()));
 
+        map.put("userPageLink", userService.getCurrentUser().getFirstname());
+
         return "index";
     }
 

@@ -26,6 +26,11 @@
       </a>
     </li>
     <li>
+      <a href="<c:url value="/user" />">
+          <p>${userPageLink}</p>
+      </a>
+    </li>
+    <li>
       <a href="<c:url value="/action" />">
         <img src="<c:url value="/resources/images/add.png"/>" alt="<spring:message code="label.addaction" />"/>
       </a>
