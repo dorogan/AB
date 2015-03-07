@@ -26,7 +26,7 @@
       </a>
     </li>
     <li>
-      <a href="<c:url value="/user" />">
+      <a href="<c:url value="/user/${userID}" />">
           <p>${userPageLink}</p>
       </a>
     </li>

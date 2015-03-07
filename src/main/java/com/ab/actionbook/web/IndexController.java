@@ -26,7 +26,10 @@ public class IndexController {
         map.put("action", new Action());
         map.put("actionList", actionService.listAction(userService.getCurrentUser().getId()));
 
-        map.put("userPageLink", userService.getCurrentUser().getFirstname());
+        String userLink = userService.getCurrentUser().getFirstname() + " " + userService.getCurrentUser().getLastname();
+        int id = userService.getCurrentUser().getId();
+        map.put("userPageLink", userLink);
+        map.put("userID", id);
 
         return "index";
     }

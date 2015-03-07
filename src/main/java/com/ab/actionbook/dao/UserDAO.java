@@ -27,6 +27,6 @@ public interface UserDAO {
 
     public void turnDownPropose(Integer id);
 
-    public void setUserInformation();
+    public void setUserInformation(User user);
 
 }

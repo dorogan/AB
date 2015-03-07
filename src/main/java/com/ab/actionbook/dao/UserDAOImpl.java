@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,9 @@ public class UserDAOImpl implements UserDAO{
         sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO " +
                 "user_authorization (userrole_id, user_id, role)" +
                 "VALUES (" + 1 +", " + user.getId() + ", 'ROLE_USER')").executeUpdate();
+        sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO " +
+                "users_information (uid)" +
+                "VALUES (" + user.getId() + ")").executeUpdate();
     }
 
     @SuppressWarnings("unchecked")
@@ -115,8 +119,25 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void setUserInformation() {
-
+    public void setUserInformation(User user) {
+        int uid = getCurrentUser().getId();
+        Date birthday = user.getDateOfBirthday();
+        String avatar = user.getAvatarPath();
+        String interests = user.getInterests();
+        String profession = user.getProfession();
+        String phones = user.getPhone();
+        String address = user.getAddress();
+        String skype = user.getSkype();
+        sessionFactory.getCurrentSession().createSQLQuery("UPDATE " +
+                "users_information SET " +
+                "`birthday`=" + "'" + birthday  + "', " +
+                "`avatar`=" + "'" + avatar + "'" + ", " +
+                "`interests`=" + "'" + interests + "'" + ", " +
+                "`profession`=" + "'" + profession + "'" + ", " +
+                "`phones`=" + "'" + phones + "'" + ", " +
+                "`address`=" + "'" + address + "'" + ", " +
+                "`skype`=" + "'" + skype + "'" +
+                " WHERE `uid`=" + uid).executeUpdate();
     }
 
     /*@SuppressWarnings("deprecation")

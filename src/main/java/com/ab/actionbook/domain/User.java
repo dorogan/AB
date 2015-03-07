@@ -1,7 +1,10 @@
 package com.ab.actionbook.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Table(name = "users")
@@ -45,9 +48,9 @@ public class User {
     @Column(name = "role", table = "user_authorization")
     private String role;
 
-    @Column(name = "reg_date", table = "users_information")
-    private Date dateOfRegistry;
-
+    //@Column(name = "reg_date", table = "users_information")
+    //private Date dateOfRegistry;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Column(name = "birthday", table = "users_information")
     private Date dateOfBirthday;
 
@@ -157,14 +160,6 @@ public class User {
 
     public void setRelation(Integer relation) {
         this.relation = relation;
-    }
-
-    public Date getDateOfRegistry() {
-        return dateOfRegistry;
-    }
-
-    public void setDateOfRegistry(Date dateOfRegistry) {
-        this.dateOfRegistry = dateOfRegistry;
     }
 
     public Date getDateOfBirthday() {
