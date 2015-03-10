@@ -29,4 +29,6 @@ public interface UserService {
 
     public void setUserInformation(User user);
 
+    public User getUserInformation(Integer id);
+
 }

@@ -12,6 +12,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Date;
+import java.util.Map;
 
 @Controller
 public class UserInfoController {
@@ -20,7 +21,14 @@ public class UserInfoController {
     private UserService userService;
 
     @RequestMapping("/userinfo")
-    public String setInfoPage(){
+    public String setInfoPage(@ModelAttribute("user")User user, Map<String, Object> map){
+        int cid = userService.getCurrentUser().getId();
+        user = userService.getUserInformation(cid);
+        map.put("cid", cid);
+        map.put("mail", user.getEmail());
+        map.put("birthday", user.getDateOfBirthday());
+        map.put("avatarPath", user.getAvatarPath());
+        map.put("interests", user.getInterests());
         return "userinfo";
     }
 
@@ -30,6 +38,11 @@ public class UserInfoController {
         user.setDateOfBirthday(date);
         userService.setUserInformation(user);
         return "redirect:/index";
+    }
+
+    @RequestMapping(value = "/userinfo/avatar")
+    public String setAvatar(@RequestParam("avatarPath") MultipartFile file){
+        return "userinfo";
     }
 
 }

@@ -18,12 +18,8 @@
             <td><input class="form-field" type="date" name="dateOfBirthday" /></td>
         </tr>
         <tr>
-            <td align="right"><spring:message code="usrinf.avatar" /></td>
-            <td><input class="form-field" type="file" name="avatarPath" /></td>
-        </tr>
-        <tr>
             <td align="right"><spring:message code="usrinf.interests" /></td>
-            <td><input class="form-field" type="text" name="interests" /></td>
+            <td><input class="form-field" type="text" name="interests" value="${interests}"/></td>
         </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.profession" /></td>
@@ -44,6 +40,22 @@
         <tr>
             <td class="submit-container" colspan="2" align="right">
                 <input class="submit-button" type="submit" value="Save" />
+            </td>
+        </tr>
+    </table>
+</form>
+<form class="form-container" method="POST" action="/userinfo/avatar" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td colspan="2"><img src="${avatarPath}"></td>
+        </tr>
+        <tr>
+            <td align="right"><spring:message code="usrinf.avatar" /></td>
+            <td><input class="form-field" type="file" name="avatarPath" /></td>
+        </tr>
+        <tr>
+            <td class="submit-container" colspan="2" align="right">
+                <input class="submit-button" type="submit" value="Set Avatar" />
             </td>
         </tr>
     </table>

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Map;
+
 @Controller
 public class UserController {
 
@@ -28,8 +30,17 @@ public class UserController {
     }
 
     @RequestMapping("/user/{userID}")
-    public String userPage(@PathVariable("userID") Integer userID){
-
+    public String userPage(@PathVariable("userID") Integer userID,
+                           @ModelAttribute("user")User user, Map<String, Object> map){
+        int cid = userService.getCurrentUser().getId();
+        user = userService.getUserInformation(userID);
+        map.put("cid", cid);
+        map.put("id", userID);
+        map.put("name", user.getFirstname());
+        map.put("sname", user.getLastname());
+        map.put("mail", user.getEmail());
+        map.put("birthday", user.getDateOfBirthday());
+        map.put("avatarPath", user.getAvatarPath());
         return "user";
     }
 

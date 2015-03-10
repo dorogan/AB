@@ -140,6 +140,39 @@ public class UserDAOImpl implements UserDAO{
                 " WHERE `uid`=" + uid).executeUpdate();
     }
 
+    @Override
+    public List<User> findUserById(Integer id) {
+        return sessionFactory.getCurrentSession().createQuery("from User where id=" + id).list();
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        User user = new User(
+                findUserById(id).get(0).getLogin(),
+                findUserById(id).get(0).getFirstname(),
+                findUserById(id).get(0).getLastname(),
+                findUserById(id).get(0).getEmail(),
+                findUserById(id).get(0).getPassword()
+        );
+        user.setId(id);
+        return user;
+    }
+
+    @Override
+    public User getUserInformation(Integer id) {
+        User user = getUserById(id);
+        //Date date = (Date) sessionFactory.getCurrentSession().createSQLQuery("SELECT `birthday` FROM `users_information` " +
+                //"WHERE `uid`=" + id).list().get(0);
+        //user.setDateOfBirthday(date);
+        user.setAvatarPath(sessionFactory.getCurrentSession()
+                .createQuery("select avatarPath from User where id=" + id).list().get(0).toString());
+        user.setDateOfBirthday((Date)sessionFactory.getCurrentSession()
+                .createQuery("select dateOfBirthday from User where id=" + id).list().get(0));
+        user.setInterests(sessionFactory.getCurrentSession()
+                .createQuery("select interests from User where id=" + id).list().get(0).toString());
+        return user;
+    }
+
     /*@SuppressWarnings("deprecation")
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException, DataAccessException {
@@ -171,4 +204,8 @@ public class UserDAOImpl implements UserDAO{
         user.setId(findUserByLogin(s).get(0).getId());
         return user;
     }
+    /*
+    * Get avatar path
+    * */
+
 }

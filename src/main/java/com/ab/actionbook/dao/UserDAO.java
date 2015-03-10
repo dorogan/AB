@@ -29,4 +29,10 @@ public interface UserDAO {
 
     public void setUserInformation(User user);
 
+    public List<User> findUserById(Integer id);
+
+    public User getUserById(Integer id);
+
+    public User getUserInformation(Integer id);
+
 }

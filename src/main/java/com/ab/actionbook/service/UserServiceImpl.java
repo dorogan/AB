@@ -77,4 +77,10 @@ public class UserServiceImpl implements UserService{
     public void setUserInformation(User user) {
         userDAO.setUserInformation(user);
     }
+
+    @Transactional
+    @Override
+    public User getUserInformation(Integer id) {
+        return userDAO.getUserInformation(id);
+    }
 }
