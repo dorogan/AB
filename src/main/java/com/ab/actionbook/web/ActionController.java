@@ -35,12 +35,12 @@ public class ActionController {
 	public String home() {
 		return "redirect:/index";
 	}
-
+    /*
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addAction(@ModelAttribute("action") Action action, BindingResult result) {
 		actionService.addAction(action, userService.getCurrentUser().getId());
 		return "redirect:/index";
-	}
+	}*/
 
 	@RequestMapping("/delete/{actionId}")
 	public String deleteAction(@PathVariable("actionId") Integer actionId) {

@@ -83,4 +83,10 @@ public class UserServiceImpl implements UserService{
     public User getUserInformation(Integer id) {
         return userDAO.getUserInformation(id);
     }
+
+    @Transactional
+    @Override
+    public void setAP(String path) {
+        userDAO.setAP(path);
+    }
 }

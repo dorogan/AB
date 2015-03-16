@@ -23,19 +23,19 @@
         </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.profession" /></td>
-            <td><input class="form-field" type="text" name="profession" /></td>
+            <td><input class="form-field" type="text" name="profession" value="${profession}"/></td>
         </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.phone" /></td>
-            <td><input class="form-field" type="text" name="phone" /></td>
+            <td><input class="form-field" type="text" name="phone" value="${phone}"/></td>
         </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.address" /></td>
-            <td><input class="form-field" type="text" name="address" /></td>
+            <td><input class="form-field" type="text" name="address" value="${address}"/></td>
         </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.skype" /></td>
-            <td><input class="form-field" type="text" name="skype" /></td>
+            <td><input class="form-field" type="text" name="skype" value="${skype}"/></td>
         </tr>
         <tr>
             <td class="submit-container" colspan="2" align="right">
@@ -47,11 +47,11 @@
 <form class="form-container" method="POST" action="/userinfo/avatar" enctype="multipart/form-data">
     <table>
         <tr>
-            <td colspan="2"><img src="${avatarPath}"></td>
+            <td colspan="2"><img src="${pageContext.request.contextPath}${avatarPath}"></td>
         </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.avatar" /></td>
-            <td><input class="form-field" type="file" name="avatarPath" /></td>
+            <td><input type="file" name="file" /></td>
         </tr>
         <tr>
             <td class="submit-container" colspan="2" align="right">

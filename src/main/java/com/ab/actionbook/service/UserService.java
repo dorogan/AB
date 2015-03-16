@@ -31,4 +31,6 @@ public interface UserService {
 
     public User getUserInformation(Integer id);
 
+    public void setAP(String path);
+
 }

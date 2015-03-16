@@ -36,6 +36,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @Column(name = "dateOfReg")
+    private Date dateOfReg;
+
     @Column(name = "fid", table = "users_relations")
     private Integer fid;
 
@@ -144,6 +148,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getDateOfReg() {
+        return dateOfReg;
+    }
+
+    public void setDateOfReg(Date dateOfReg) {
+        this.dateOfReg = dateOfReg;
     }
 
     public Integer getFid() {

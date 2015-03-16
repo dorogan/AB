@@ -35,4 +35,6 @@ public interface UserDAO {
 
     public User getUserInformation(Integer id);
 
+    public void setAP(String path);
+
 }

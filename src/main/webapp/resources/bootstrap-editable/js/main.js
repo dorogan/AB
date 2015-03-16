@@ -2,8 +2,17 @@ $(document).ready(function() {
     //toggle `popup` / `inline` mode
     $.fn.editable.defaults.mode = 'inline';
     
-    //make username editable
-    $('.username').editable();
+    //make name editable
+    $('.name').editable({
+        type: 'text',
+        title: 'Action',
+        placement: 'right'
+
+    });
+    //make new-action editable
+    $('#new-action').editable({
+        rows: '20'
+    });
     
     //make status editable
     $('#status').editable({

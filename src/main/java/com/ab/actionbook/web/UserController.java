@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Map;
 
 @Controller
@@ -25,6 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user")User user, BindingResult result){
+        user.setDateOfReg(new Date(Calendar.getInstance().getTimeInMillis()));
         userService.addUser(user);
         return "redirect:/index";
     }
@@ -41,6 +44,11 @@ public class UserController {
         map.put("mail", user.getEmail());
         map.put("birthday", user.getDateOfBirthday());
         map.put("avatarPath", user.getAvatarPath());
+        map.put("interests", user.getInterests());
+        map.put("profession", user.getProfession());
+        map.put("phone", user.getPhone());
+        map.put("address", user.getAddress());
+        map.put("skype", user.getSkype());
         return "user";
     }
 

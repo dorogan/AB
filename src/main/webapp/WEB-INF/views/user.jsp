@@ -16,8 +16,13 @@
     <div><img src="${avatarPath}" alt="User photo"></div>
     <div><h2>${name} ${sname}</h2></div>
     <div>
-        <p>${mail}</p>
-        <p>${birthday}</p>
+        <p><spring:message code="label.mail" />: ${mail}</p>
+        <p><spring:message code="usrinf.birthday" />: ${birthday}</p>
+        <p><spring:message code="usrinf.interests" />: ${interests}</p>
+        <p><spring:message code="usrinf.profession" />: ${profession}</p>
+        <p><spring:message code="usrinf.phone" />: ${phone}</p>
+        <p><spring:message code="usrinf.address" />: ${address}</p>
+        <p><spring:message code="usrinf.skype" />: ${skype}</p>
     </div>
 </body>
 </html>

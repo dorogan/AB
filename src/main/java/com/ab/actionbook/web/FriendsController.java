@@ -15,11 +15,6 @@ public class FriendsController {
     @Autowired
     private UserService userService;
 
-    /*@RequestMapping("/friends")
-    public String listFriends(Map<String, Object> map){
-        return "friends";
-    }*/
-
     @RequestMapping("/friends")
     public String listPropositions(Map<String, Object> map){
         map.put("user", new User());

@@ -3,7 +3,10 @@ package com.ab.actionbook.dao;
 import com.ab.actionbook.domain.User;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.JDBC4Connection;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
@@ -15,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +34,8 @@ public class UserDAOImpl implements UserDAO{
                 "user_authorization (userrole_id, user_id, role)" +
                 "VALUES (" + 1 +", " + user.getId() + ", 'ROLE_USER')").executeUpdate();
         sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO " +
-                "users_information (uid)" +
-                "VALUES (" + user.getId() + ")").executeUpdate();
+                "users_information (uid, avatar, interests, profession, phones, address, skype)" +
+                "VALUES (" + user.getId() + ", '/resources/images/no-photo.png', '', '', '', '', '')").executeUpdate();
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +46,13 @@ public class UserDAOImpl implements UserDAO{
 
     @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
-        return sessionFactory.getCurrentSession().createQuery("from User").list();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.setMaxResults(25);
+        criteria.add(Restrictions.not(Restrictions.in("id", new Integer[] {getCurrentUser().getId()})));
+        List users = criteria.list();
+        //return sessionFactory.getCurrentSession().createQuery("from User where id not in ("
+        //        + getCurrentUser().getId() + ")").list();
+        return users;
     }
 
     @SuppressWarnings("unchecked")
@@ -122,7 +130,6 @@ public class UserDAOImpl implements UserDAO{
     public void setUserInformation(User user) {
         int uid = getCurrentUser().getId();
         Date birthday = user.getDateOfBirthday();
-        String avatar = user.getAvatarPath();
         String interests = user.getInterests();
         String profession = user.getProfession();
         String phones = user.getPhone();
@@ -131,7 +138,6 @@ public class UserDAOImpl implements UserDAO{
         sessionFactory.getCurrentSession().createSQLQuery("UPDATE " +
                 "users_information SET " +
                 "`birthday`=" + "'" + birthday  + "', " +
-                "`avatar`=" + "'" + avatar + "'" + ", " +
                 "`interests`=" + "'" + interests + "'" + ", " +
                 "`profession`=" + "'" + profession + "'" + ", " +
                 "`phones`=" + "'" + phones + "'" + ", " +
@@ -161,37 +167,28 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User getUserInformation(Integer id) {
         User user = getUserById(id);
-        //Date date = (Date) sessionFactory.getCurrentSession().createSQLQuery("SELECT `birthday` FROM `users_information` " +
-                //"WHERE `uid`=" + id).list().get(0);
-        //user.setDateOfBirthday(date);
         user.setAvatarPath(sessionFactory.getCurrentSession()
                 .createQuery("select avatarPath from User where id=" + id).list().get(0).toString());
         user.setDateOfBirthday((Date)sessionFactory.getCurrentSession()
                 .createQuery("select dateOfBirthday from User where id=" + id).list().get(0));
         user.setInterests(sessionFactory.getCurrentSession()
                 .createQuery("select interests from User where id=" + id).list().get(0).toString());
+        user.setProfession(sessionFactory.getCurrentSession()
+                .createQuery("select profession from User where id=" + id).list().get(0).toString());
+        user.setPhone(sessionFactory.getCurrentSession()
+                .createQuery("select phone from User where id=" + id).list().get(0).toString());
+        user.setAddress(sessionFactory.getCurrentSession()
+                .createQuery("select address from User where id=" + id).list().get(0).toString());
+        user.setSkype(sessionFactory.getCurrentSession()
+                .createQuery("select skype from User where id=" + id).list().get(0).toString());
         return user;
     }
 
-    /*@SuppressWarnings("deprecation")
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException, DataAccessException {
-        User user = new User(
-                findUserByLogin(s).get(0).getLogin(),
-                findUserByLogin(s).get(0).getFirstname(),
-                findUserByLogin(s).get(0).getLastname(),
-                findUserByLogin(s).get(0).getEmail(),
-                findUserByLogin(s).get(0).getPassword()
-        );
-        user.setId(findUserByLogin(s).get(0).getId());
-        List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList("ROLE_USER");
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                user.getLogin(),
-                user.getPassword(),
-                authorityList
-        );
-        return userDetails;
-    }*/
+    public void setAP(String path) {
+        sessionFactory.getCurrentSession().createSQLQuery("UPDATE users_information SET `avatar`='" + path
+                + "' WHERE uid = " + getCurrentUser().getId()).executeUpdate();
+    }
 
     public User getUserByLogin(String s){
         User user = new User(
@@ -204,8 +201,5 @@ public class UserDAOImpl implements UserDAO{
         user.setId(findUserByLogin(s).get(0).getId());
         return user;
     }
-    /*
-    * Get avatar path
-    * */
 
 }

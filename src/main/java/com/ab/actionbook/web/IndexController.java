@@ -6,8 +6,8 @@ import com.ab.actionbook.service.ActionService;
 import com.ab.actionbook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -32,6 +32,15 @@ public class IndexController {
         map.put("userID", id);
 
         return "index";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public String addAction(@RequestParam(value = "name") String name,
+                            @ModelAttribute("action") Action action, BindingResult result) {
+        action.setName(name);
+        actionService.addAction(action, userService.getCurrentUser().getId());
+        return "redirect:/index";
     }
 
 }

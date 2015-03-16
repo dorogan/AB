@@ -13,8 +13,7 @@
   <table class="data">
     <c:forEach items="${userList}" var="user">
       <tr>
-        <td><h4>${user.firstname}</h4></td>
-        <td><h4>${user.lastname}</h4></td>
+        <td><a href="/user/${user.id}"> <h4>${user.firstname} ${user.lastname}</h4> </a></td>
         <td><a href="/add/${user.id}" ><spring:message code="msg.addtofriend" /> - ${user.id}</a> </td>
       </tr>
     </c:forEach>

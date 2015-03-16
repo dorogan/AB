@@ -11,10 +11,33 @@
   <table class="data">
     <c:forEach items="${actionList}" var="action">
       <tr>
-        <td><h4 class="username" data-type="text" data-placement="right" data-title="Enter username">${action.name}</h4></td>
-        <td><a  href="delete/${action.id}"><img src="<c:url value="/resources/images/del.png"/>"></a></td>
+        <td>
+            <a href="delete/${action.id}">
+                <img src="<c:url value="/resources/images/action-status-0.png"/>">&nbsp;&nbsp;&nbsp;
+            </a>
+        </td>
+        <td>
+            <h4 class="name" >
+                ${action.name}
+            </h4>
+        </td>
+        <td>
+            <a  href="delete/${action.id}">&nbsp;&nbsp;&nbsp;
+                <img src="<c:url value="/resources/images/action-info.png"/>"></a>
+        </td>
+        <td>
+            <a  href="delete/${action.id}"><img src="<c:url value="/resources/images/del.png"/>"></a>&nbsp;&nbsp;&nbsp;
+        </td>
       </tr>
     </c:forEach>
+      <tr>
+          <td colspan="2">
+              <a href="#" id="new-action" data-type="text" data-pk="1" data-placement="right"
+                 data-title="Enter action" data-value="" data-url="add" >
+                <spring:message code="label.addaction" />
+              </a>
+          </td>
+      </tr>
   </table>
 </c:if>
 </body>
