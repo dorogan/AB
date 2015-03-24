@@ -10,4 +10,14 @@ public interface ActionDAO {
 	public List<Action> listAction(Integer uid);
 
 	public void removeAction(Integer id);
+
+    public void updateActionName(Integer id, String name);
+
+    public void setActionStatusDone(Integer id);
+
+    public Action getActionById(Integer id);
+
+    public void updateAction(Integer id, Action action);
+
+    public void sortByDate(List<Action> actions);
 }

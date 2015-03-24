@@ -28,4 +28,32 @@ public class ActionServiceImpl implements ActionService {
     public void removeAction(Integer id) {
         actionDAO.removeAction(id);
     }
+
+    @Transactional
+    @Override
+    public void updateActionName(Integer id, String name) {
+        actionDAO.updateActionName(id, name);
+    }
+
+    @Transactional
+    @Override
+    public void setActionStatusDone(Integer id) {
+        actionDAO.setActionStatusDone(id);
+    }
+
+    @Transactional
+    @Override
+    public Action getActionById(Integer id) {
+        return actionDAO.getActionById(id);
+    }
+
+    @Transactional
+    @Override
+    public void updateAction(Integer id, Action action) {
+        actionDAO.updateAction(id, action);
+    }
+
+    public void sortByDate(List<Action> actions){
+        actionDAO.sortByDate(actions);
+    }
 }
