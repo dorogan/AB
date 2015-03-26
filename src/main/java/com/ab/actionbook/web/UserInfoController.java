@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.util.Map;
 
 @Controller
+@SessionAttributes("user")
 public class UserInfoController {
 
     @Autowired
@@ -25,9 +26,10 @@ public class UserInfoController {
 
     @RequestMapping("/userinfo")
     public String setInfoPage(@ModelAttribute("user")User user, Map<String, Object> map){
-        int cid = userService.getCurrentUser().getId();
-        user = userService.getUserInformation(cid);
-        map.put("cid", cid);
+        //user = userService.getCurrentUser();
+        //int cid = userService.getCurrentUser().getId();
+        //user = userService.getUserInformation(cid);
+        map.put("cid", user.getId());
         map.put("mail", user.getEmail());
         map.put("birthday", user.getDateOfBirthday());
         map.put("avatarPath", user.getAvatarPath());
@@ -40,16 +42,16 @@ public class UserInfoController {
     }
 
     @RequestMapping(value = "/userinfo/save", method = RequestMethod.POST)
-    public String saveUserInfo(@RequestParam("dateOfBirthday") Date date,
-                               @ModelAttribute("user")User user, BindingResult result){
-        user.setDateOfBirthday(date);
+    public String saveUserInfo(@ModelAttribute("user")User user, BindingResult result){
+        //user.setDateOfBirthday(date);
         userService.setUserInformation(user);
         return "redirect:/index";
     }
 
     @RequestMapping(value = "/userinfo/avatar", method = RequestMethod.POST)
     @ResponseBody
-    public String setAvatar(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException{
+    public String setAvatar(@RequestParam("file") MultipartFile file,
+                            @ModelAttribute("user")User user, HttpServletRequest request) throws IOException{
         String name = file.getOriginalFilename();
         String ap;
         if (!file.isEmpty()) {
@@ -60,7 +62,7 @@ public class UserInfoController {
                 String rootPath = System.getProperty("catalina.home");
                 String pr = request.getSession().getServletContext().getRealPath("/resources");
                 File dir = new File(pr + File.separator + "usrAvatarsFiles"
-                        + File.separator + userService.getCurrentUser().getId());
+                        + File.separator + user.getId());
                 if (!dir.exists())
                     dir.mkdirs();
 
@@ -71,7 +73,7 @@ public class UserInfoController {
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
-                ap = "/resources/usrAvatarsFiles" + File.separator + userService.getCurrentUser().getId()
+                ap = "/resources/usrAvatarsFiles" + File.separator + user.getId()
                         + File.separator + name;
                 userService.setAP(ap);
                 return "redirect:/userinfo";

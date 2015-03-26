@@ -17,7 +17,7 @@ public class PeoplesController {
 
     @RequestMapping("/peoples")
     public String listActions(Map<String, Object> map) {
-        map.put("user", new User());
+        //map.put("user", new User());
         map.put("userList", userService.getAllUsers());
         return "peoples";
     }

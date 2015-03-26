@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@SessionAttributes("user")
 public class IndexController {
 
     @Autowired
@@ -26,15 +28,17 @@ public class IndexController {
     private ActionService actionService;
 
     @RequestMapping("/index")
-    public String listActions(Map<String, Object> map) {
-
+    public String listActions(HttpSession httpSession, Map<String, Object> map) {
+        User user = userService.getCurrentUser();
+        httpSession.setAttribute("user", user);
         map.put("action", new Action());
-        List<Action> actions = actionService.listAction(userService.getCurrentUser().getId());
+        List<Action> actions = actionService.listAction(user.getId());
         actionService.sortByDate(actions);
         map.put("actionList", actions);
 
-        String userLink = userService.getCurrentUser().getFirstname() + " " + userService.getCurrentUser().getLastname();
-        int id = userService.getCurrentUser().getId();
+        String userLink = user.getFirstname() + " " + user.getLastname();
+        int id = user.getId();
+        map.put("userPhoto", user.getAvatarPath());
         map.put("userPageLink", userLink);
         map.put("userID", id);
 
@@ -44,9 +48,10 @@ public class IndexController {
     //add new action
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public String addAction(@RequestParam(value = "value") String name,
-                            @ModelAttribute("action") Action action, BindingResult result) {
+                            @ModelAttribute("action") Action action,
+                            @ModelAttribute("user") User user, BindingResult result) {
         action.setName(name);
-        actionService.addAction(action, userService.getCurrentUser().getId());
+        actionService.addAction(action, user.getId());
         return "redirect:/index";
     }
 

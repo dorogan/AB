@@ -39,19 +39,19 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @SuppressWarnings("unchecked")
-    public List<User> findUserByLogin(String login) {
-        return sessionFactory.getCurrentSession().createQuery("from User where login='"+login+"'").list();
-
+    public User findUserByLogin(String login) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("login", login));
+        User user = (User) criteria.uniqueResult();
+        return user;
     }
 
     @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
         criteria.setMaxResults(25);
-        criteria.add(Restrictions.not(Restrictions.in("id", new Integer[] {getCurrentUser().getId()})));
+        criteria.add(Restrictions.not(Restrictions.in("id", new Integer[]{getCurrentUser().getId()})));
         List users = criteria.list();
-        //return sessionFactory.getCurrentSession().createQuery("from User where id not in ("
-        //        + getCurrentUser().getId() + ")").list();
         return users;
     }
 
@@ -71,7 +71,7 @@ public class UserDAOImpl implements UserDAO{
         } else {
             username = principal.toString();
         }
-        User user = getUserByLogin(username);
+        User user = findUserByLogin(username);
         return user;
     }
 
@@ -147,40 +147,22 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public List<User> findUserById(Integer id) {
-        return sessionFactory.getCurrentSession().createQuery("from User where id=" + id).list();
+    public User findUserById(Integer id) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.add(Restrictions.like("id", new Integer(id)));
+        User user = (User) criteria.uniqueResult();
+        return user;
     }
 
     @Override
     public User getUserById(Integer id) {
-        User user = new User(
-                findUserById(id).get(0).getLogin(),
-                findUserById(id).get(0).getFirstname(),
-                findUserById(id).get(0).getLastname(),
-                findUserById(id).get(0).getEmail(),
-                findUserById(id).get(0).getPassword()
-        );
-        user.setId(id);
+        User user = findUserById(id);
         return user;
     }
 
     @Override
     public User getUserInformation(Integer id) {
-        User user = getUserById(id);
-        user.setAvatarPath(sessionFactory.getCurrentSession()
-                .createQuery("select avatarPath from User where id=" + id).list().get(0).toString());
-        user.setDateOfBirthday((Date)sessionFactory.getCurrentSession()
-                .createQuery("select dateOfBirthday from User where id=" + id).list().get(0));
-        user.setInterests(sessionFactory.getCurrentSession()
-                .createQuery("select interests from User where id=" + id).list().get(0).toString());
-        user.setProfession(sessionFactory.getCurrentSession()
-                .createQuery("select profession from User where id=" + id).list().get(0).toString());
-        user.setPhone(sessionFactory.getCurrentSession()
-                .createQuery("select phone from User where id=" + id).list().get(0).toString());
-        user.setAddress(sessionFactory.getCurrentSession()
-                .createQuery("select address from User where id=" + id).list().get(0).toString());
-        user.setSkype(sessionFactory.getCurrentSession()
-                .createQuery("select skype from User where id=" + id).list().get(0).toString());
+        User user = findUserById(id);
         return user;
     }
 
@@ -188,18 +170,6 @@ public class UserDAOImpl implements UserDAO{
     public void setAP(String path) {
         sessionFactory.getCurrentSession().createSQLQuery("UPDATE users_information SET `avatar`='" + path
                 + "' WHERE uid = " + getCurrentUser().getId()).executeUpdate();
-    }
-
-    public User getUserByLogin(String s){
-        User user = new User(
-                findUserByLogin(s).get(0).getLogin(),
-                findUserByLogin(s).get(0).getFirstname(),
-                findUserByLogin(s).get(0).getLastname(),
-                findUserByLogin(s).get(0).getEmail(),
-                findUserByLogin(s).get(0).getPassword()
-        );
-        user.setId(findUserByLogin(s).get(0).getId());
-        return user;
     }
 
 }

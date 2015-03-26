@@ -9,7 +9,7 @@ public interface UserDAO {
 
     public void addUser(User user);
 
-    public List<User> findUserByLogin(String login);
+    public User findUserByLogin(String login);
 
     public List<User> getAllUsers();
 
@@ -29,7 +29,7 @@ public interface UserDAO {
 
     public void setUserInformation(User user);
 
-    public List<User> findUserById(Integer id);
+    public User findUserById(Integer id);
 
     public User getUserById(Integer id);
 

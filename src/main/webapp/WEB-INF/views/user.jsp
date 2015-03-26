@@ -3,13 +3,10 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
-<head>
-    <title></title>
-</head>
 
-<body>
-    <jsp:include page="menu.jsp" />
+<jsp:include page="menu.jsp" />
+
+<div id="main">
     <c:if test="${id == cid}" >
         <a href="/userinfo">edit inf</a>
     </c:if>
@@ -24,5 +21,6 @@
         <p><spring:message code="usrinf.address" />: ${address}</p>
         <p><spring:message code="usrinf.skype" />: ${skype}</p>
     </div>
+</div>
 </body>
 </html>

@@ -15,7 +15,7 @@
     <table>
         <tr>
             <td align="right"><spring:message code="usrinf.birthday" /></td>
-            <td><input class="form-field" type="date" name="dateOfBirthday" /></td>
+            <td><input class="form-field" type="date" name="dateOfBirthday" value="${birthday}"/></td>
         </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.interests" /></td>

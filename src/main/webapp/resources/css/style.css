@@ -21,6 +21,20 @@ body div.left-bar{
     padding-bottom: 10px;
     background-color: #c7c7c7;
     border-right: 1px solid #a58385;
+    text-align: center;
+}
+
+div#main{
+    position: absolute;
+    left: 15%;
+    padding-left: 2%;
+}
+
+div.left-bar img.mini-photo{
+    float: left;
+    text-align: left;
+    width: auto;
+    height: 60px;
 }
 
 body div.left-bar h1{
