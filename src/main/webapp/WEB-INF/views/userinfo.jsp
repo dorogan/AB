@@ -3,16 +3,25 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
-<head>
-    <title><spring:message code="usrinf.title" /></title>
-</head>
-<body>
+
+<jsp:include page="top.jsp"/>
+
+<jsp:include page="menu.jsp" />
+
+<div id="main">
 <form class="form-container" method="POST" action="/userinfo/save" >
     <h4 align="center" class="form-title">
         <spring:message code="usrinf.title" />
     </h4>
     <table>
+        <tr>
+            <td align="right"><spring:message code="label.name" /></td>
+            <td><input class="form-field" type="text" name="firstname" value="${user.firstname}"/></td>
+        </tr>
+        <tr>
+            <td align="right"><spring:message code="label.secondname" /></td>
+            <td><input class="form-field" type="text" name="lastname" value="${user.lastname}"/></td>
+        </tr>
         <tr>
             <td align="right"><spring:message code="usrinf.birthday" /></td>
             <td><input class="form-field" type="date" name="dateOfBirthday" value="${birthday}"/></td>
@@ -60,5 +69,6 @@
         </tr>
     </table>
 </form>
+</div>
 </body>
 </html>

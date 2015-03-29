@@ -26,9 +26,7 @@ public class UserInfoController {
 
     @RequestMapping("/userinfo")
     public String setInfoPage(@ModelAttribute("user")User user, Map<String, Object> map){
-        //user = userService.getCurrentUser();
-        //int cid = userService.getCurrentUser().getId();
-        //user = userService.getUserInformation(cid);
+
         map.put("cid", user.getId());
         map.put("mail", user.getEmail());
         map.put("birthday", user.getDateOfBirthday());
@@ -43,7 +41,6 @@ public class UserInfoController {
 
     @RequestMapping(value = "/userinfo/save", method = RequestMethod.POST)
     public String saveUserInfo(@ModelAttribute("user")User user, BindingResult result){
-        //user.setDateOfBirthday(date);
         userService.setUserInformation(user);
         return "redirect:/index";
     }

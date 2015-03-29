@@ -4,6 +4,7 @@ import com.ab.actionbook.domain.User;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.JDBC4Connection;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
@@ -128,22 +129,26 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void setUserInformation(User user) {
-        int uid = getCurrentUser().getId();
-        Date birthday = user.getDateOfBirthday();
-        String interests = user.getInterests();
-        String profession = user.getProfession();
-        String phones = user.getPhone();
-        String address = user.getAddress();
-        String skype = user.getSkype();
-        sessionFactory.getCurrentSession().createSQLQuery("UPDATE " +
-                "users_information SET " +
-                "`birthday`=" + "'" + birthday  + "', " +
-                "`interests`=" + "'" + interests + "'" + ", " +
-                "`profession`=" + "'" + profession + "'" + ", " +
-                "`phones`=" + "'" + phones + "'" + ", " +
-                "`address`=" + "'" + address + "'" + ", " +
-                "`skype`=" + "'" + skype + "'" +
-                " WHERE `uid`=" + uid).executeUpdate();
+        Query query = sessionFactory.getCurrentSession().createQuery("update User set " +
+                "firstname = :uFirstName, " +
+                "lastname = :uLastName, " +
+                "dateOfBirthday = :uDateOfBirthday, " +
+                "interests = :uInterests, " +
+                "profession = :uProfession, " +
+                "phone = :uPhone, " +
+                "address = :uAddress, " +
+                "skype = :uSkype " +
+                "where id = :uId");
+        query.setParameter("uFirstName", user.getFirstname());
+        query.setParameter("uLastName", user.getLastname());
+        query.setParameter("uDateOfBirthday", user.getDateOfBirthday());
+        query.setParameter("uInterests", user.getInterests());
+        query.setParameter("uProfession", user.getProfession());
+        query.setParameter("uPhone", user.getPhone());
+        query.setParameter("uAddress", user.getAddress());
+        query.setParameter("uSkype", user.getSkype());
+        query.setParameter("uId", user.getId());
+        query.executeUpdate();
     }
 
     @Override
