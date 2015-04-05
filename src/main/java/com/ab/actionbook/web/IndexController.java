@@ -41,6 +41,7 @@ public class IndexController {
         map.put("userPhoto", user.getAvatarPath());
         map.put("userPageLink", userLink);
         map.put("userID", id);
+        map.put("countOfProp", userService.getCountOfPropositionToFriends());
 
         return "index";
     }

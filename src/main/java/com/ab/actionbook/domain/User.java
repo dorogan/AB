@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 @Entity
 @Table(name = "users")
 @SecondaryTables({
-        @SecondaryTable(name = "users_relations", pkJoinColumns = @PrimaryKeyJoinColumn(name = "uid")),
+        //@SecondaryTable(name = "users_relations", pkJoinColumns = @PrimaryKeyJoinColumn(name = "uid")),
         @SecondaryTable(name = "user_authorization", pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id")),
         @SecondaryTable(name = "users_information", pkJoinColumns = @PrimaryKeyJoinColumn(name = "uid"))
 })
@@ -40,11 +40,11 @@ public class User {
     @Column(name = "dateOfReg")
     private Date dateOfReg;
 
-    @Column(name = "fid", table = "users_relations")
+    /*@Column(name = "fid", table = "users_relations")
     private Integer fid;
 
     @Column(name = "relation", table = "users_relations")
-    private Integer relation;
+    private Integer relation;*/
 
     @Column(name = "userrole_id", table = "user_authorization")
     private Integer userrole_id;
@@ -157,7 +157,7 @@ public class User {
     public void setDateOfReg(Date dateOfReg) {
         this.dateOfReg = dateOfReg;
     }
-
+/*
     public Integer getFid() {
         return fid;
     }
@@ -172,7 +172,7 @@ public class User {
 
     public void setRelation(Integer relation) {
         this.relation = relation;
-    }
+    }*/
 
     public Date getDateOfBirthday() {
         return dateOfBirthday;

@@ -26,6 +26,7 @@ public class ActionDAOImpl implements ActionDAO {
 	public void addAction(Action action, Integer uid) {
 		action.setUid(uid);
         action.setDate(new Date(Calendar.getInstance().getTimeInMillis()));
+        action.setDeadline(new Date(Calendar.getInstance().getTimeInMillis()));
         action.setDescription("");
         action.setPermission(0);
         action.setStatus(0);
@@ -85,12 +86,14 @@ public class ActionDAOImpl implements ActionDAO {
         Query query = sessionFactory.getCurrentSession().createQuery("update Action set" +
                 " description = :actionDescription" +
                 ", date = :actionDate" +
+                ", deadline = :actionDeadline" +
                 ", time = :actionTime" +
                 ", permission = :actionPermission" +
                 ", priority = :actionPriority" +
                 " where id = :actionID");
         query.setParameter("actionDescription", action.getDescription());
         query.setParameter("actionDate", action.getDate());
+        query.setParameter("actionDeadline", action.getDeadline());
         query.setParameter("actionTime", action.getTime());
         query.setParameter("actionPermission", action.getPermission());
         query.setParameter("actionPriority", action.getPriority());

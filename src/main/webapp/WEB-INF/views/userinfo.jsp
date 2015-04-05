@@ -70,5 +70,8 @@
     </table>
 </form>
 </div>
+
+<jsp:include page="right.jsp"/>
+
 </body>
 </html>

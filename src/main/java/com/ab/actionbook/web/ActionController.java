@@ -61,12 +61,14 @@ public class ActionController {
     public void updateActionDetails(@PathVariable("actionId") Integer actionId,
                                     @RequestParam(value = "act-description") String description,
                                     @RequestParam(value = "act-date") Date date,
+                                    @RequestParam(value = "act-deadline") Date deadline,
                                     @RequestParam(value = "act-time") String time,
                                     @RequestParam(value = "act-permission") Integer permission,
                                     @RequestParam(value = "act-priority") Integer priority){
         Action action = actionService.getActionById(actionId);
         action.setDescription(description);
         action.setDate(date);
+        action.setDeadline(deadline);
         if (time.equals("00:00")){
             action.setTime(null);
         }

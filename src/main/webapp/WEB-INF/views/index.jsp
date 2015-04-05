@@ -26,7 +26,12 @@
                         </h4>
                     </td>
                     <td class="date-td" >
-                        <p>${action.date}</p>
+                        <c:if test="${action.date == action.deadline}" >
+                            <p>${action.date}</p>
+                        </c:if>
+                        <c:if test="${action.date != action.deadline}" >
+                            <p>${action.date} - ${action.deadline}</p>
+                        </c:if>
                     </td>
                     <td class="details-td">
                         <a href="#" class="action-details" onclick="actionDetails(${action.id})">
@@ -49,12 +54,16 @@
 </div>
 <div  id="details-action">
     <form method="post" id="act-form-details" action="javascript:void(null);">
-        <h3><spring:message code="actdtls.formname" /></h3>
-        <input type="hidden" value="" id="id" name="id"><br>
+        <h3><spring:message code="actdtls.formname" />
+            <img class="close-details-form" src="/resources/images/del.png">
+        </h3>
+        <input type="hidden" value="" id="id" name="id">
         <h5><spring:message code="actdtls.description" /></h5>
-        <textarea id="act-description" name="act-description"></textarea><br>
+        <textarea id="act-description" name="act-description"></textarea>
         <h5><spring:message code="actdtls.date" /></h5>
         <input type="date" value="" id="act-date" name="act-date"><br>
+        <h5><spring:message code="actdtls.deadline"/></h5>
+        <input type="date" value="" id="act-deadline" name="act-deadline">
         <h5><spring:message code="actdtls.time"/></h5>
         <div class="onoffswitch">
             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
@@ -87,7 +96,7 @@
 </div>
 <script>
     function actionDetails(id){
-        $("#details-action").show();
+        $("#details-action").show("fast");
         document.getElementById("id").value = id;
         $.ajax({
             type: 'GET',
@@ -98,6 +107,7 @@
             success: function(data){
                 document.getElementById("act-description").value = data.description;
                 document.getElementById("act-date").value = data.date;
+                document.getElementById("act-deadline").value = data.deadline;
                 if(data.time == null){
                     document.getElementById("myonoffswitch").checked = false;
                     $("#act-time").hide();
@@ -114,5 +124,8 @@
 
     }
 </script>
+
+<jsp:include page="right.jsp"/>
+
 </body>
 </html>

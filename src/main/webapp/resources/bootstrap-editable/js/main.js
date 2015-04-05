@@ -65,6 +65,34 @@ $(document).ready(function() {
         }
     });
 
+    $(".close-details-form").click(
+        function(){
+            $("#details-action").hide("fast");
+        }
+    );
+
+    $("img.right-menu").click(
+        function(){
+            if($("#right-bar").is(':visible')){
+                $("#right-bar").hide("slow");
+            }
+            else{
+                $("#right-bar").show("slow");
+            }
+        }
+    );
+
+    $("img.left-menu").click(
+        function(){
+            if($("#left-bar").is(':visible')){
+                $("#left-bar").hide("slow");
+            }
+            else{
+                $("#left-bar").show("slow");
+            }
+        }
+    );
+
     $("#submit-update").click(
         function(){
             if(document.getElementById("act-time").value.split(":").length - 1 < 2){

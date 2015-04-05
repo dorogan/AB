@@ -24,5 +24,8 @@
         <p><spring:message code="usrinf.skype" />: ${skype}</p>
     </div>
 </div>
+
+<jsp:include page="right.jsp"/>
+
 </body>
 </html>

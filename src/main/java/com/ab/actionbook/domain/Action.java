@@ -27,8 +27,12 @@ public class Action {
 	private String description;
 
 	@Column(name = "date")
-    @DateTimeFormat(pattern = "yyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date date;
+
+    @Column(name = "deadline")
+    @DateTimeFormat(pattern = "yyy/MM/dd")
+    private Date deadline;
 
     @Column(name = "time")
     private Time time;
@@ -53,7 +57,15 @@ public class Action {
     @Column(name = "priority")
     private int priority;
 
-	public Integer getId() {
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public Integer getId() {
 		return id;
 	}
 

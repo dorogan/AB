@@ -3,16 +3,11 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="left-bar">
+<div id="left-bar">
     <ul>
         <li>
             <a href="#">
                 <img src="<c:url value="/resources/images/actions.png"/>" />
-            </a>
-        </li>
-        <li>
-            <a href="/peoples">
-                <spring:message code="msg.peoples" />
             </a>
         </li>
         <li>

@@ -4,61 +4,43 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html>
-<head>
-    <title></title>
-  <c:url value="/resources/css/style.css" var="cssURL" />
-  <link rel="stylesheet" type="text/css" media="screen" href="${cssURL}" />
-</head>
-<body>
-<div class="left-bar">
-  <ul>
-    <li>
-      <a href="<c:url value="/index" />">
-        <img src="<c:url value="/resources/images/ab.png"/>" />
-      </a>
-    </li>
-    <li>
-      <a href="<c:url value="/action" />">
-        <img src="<c:url value="/resources/images/add.png"/>" alt="<spring:message code="label.addaction" />"/>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <img src="<c:url value="/resources/images/actions.png"/>" />
-      </a>
-    </li>
-    <li>
-      <a href="/peoples">
-        <spring:message code="msg.peoples" />
-      </a>
-    </li>
-    <li>
-      <a href="/friends">
-        <spring:message code="msg.friends" />
-      </a>
-    </li>
+<jsp:include page="top.jsp" />
 
-  </ul>
-  <div class="exit">
-    <a href="<c:url value="/logout" />">
-      <img src="<c:url value="/resources/images/logout.png"/> " alt="<spring:message code="label.addaction" />"/>
-    </a>
-  </div>
-</div>
+<jsp:include page="menu.jsp" />
 
+<div id="main">
 <c:if test="${!empty proposeList}">
-  <table class="data">
+  <table class="peoples-list">
     <c:forEach items="${proposeList}" var="user">
       <tr>
-        <td><h4>${user.firstname}</h4></td>
-        <td><h4>${user.lastname}</h4></td>
-        <td><h4><a href="/confirm/${user.id}" ><spring:message code="btn.itisfriend" /> - ${user.id} </a> </h4></td>
-        <td><h4><a href="/down/${user.id}" ><spring:message code="btn.turnDown" />  - ${user.id}</a> </h4></td>
+        <td rowspan="2" width="130px">
+            <img class="user-avatar" src="${user.avatarPath}">
+        </td>
+        <td class="user-name">
+            <a href="/user/${user.id}">
+                <h3>${user.firstname} ${user.lastname}</h3>
+            </a>
+        </td>
+      </tr>
+    <tr>
+        <td class="add-button">
+            <a href="/confirm/${user.id}" >
+                <div class="add-to-friend-button">
+                    <spring:message code="btn.itisfriend" />
+                </div>
+            </a>
+            <a href="/down/${user.id}" >
+                <div class="add-to-friend-button">
+                    <spring:message code="btn.turnDown" />
+                </div>
+            </a>
+        </td>
       </tr>
     </c:forEach>
   </table>
 </c:if>
+</div>
+<jsp:include page="right.jsp"/>
 
 </body>
 </html>

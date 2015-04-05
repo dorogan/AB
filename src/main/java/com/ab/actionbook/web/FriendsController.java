@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.Map;
 
 @Controller
+@SessionAttributes("user")
 public class FriendsController {
 
     @Autowired
@@ -17,7 +19,7 @@ public class FriendsController {
 
     @RequestMapping("/friends")
     public String listPropositions(Map<String, Object> map){
-        map.put("user", new User());
+        //map.put("user", new User());
         map.put("proposeList", userService.getAllPropositions());
         return "friends";
     }
